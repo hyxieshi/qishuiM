@@ -1,0 +1,139 @@
+<template>
+  <TopNav></TopNav>
+  <!-- 播放详情 -->
+  <div class="con">
+    <!-- 图片 -->
+    <img :src="state.list[0].al.picUrl" alt="" />
+    <!-- 歌词 -->
+    <div class="geci">
+      <p>1</p>
+      <p>geci</p>
+      <p>歌词</p>
+    </div>
+    <!-- 功能组 -->
+    <div class="gongneng">
+      <!-- 信息 -->
+      <div class="mag">
+        <h2>{{ state.list[0].name }}</h2>
+        <p>{{ state.list[0].ar[0].name }}</p>
+        <span>关注</span>
+      </div>
+      <!-- 功能 -->
+      <!-- https://music.163.com/song/media/outer/url?id=id.mp3  -->
+      <div class="icons">
+        <div>
+          <van-icon name="like-o" badge="99+" size="0.55rem" class="icon" />
+          <van-icon name="chat-o" badge="99+" size="0.55rem" class="icon" />
+          <van-icon name="share" badge="99+" size="0.55rem" class="icon" />
+        </div>
+        <div>
+          <van-icon name="bars" size="0.55rem" class="icon" />
+          <van-icon name="ellipsis" size="0.5rem" class="icon" />
+        </div>
+      </div>
+      <!-- 进度条 -->
+      <div>
+        <van-progress pivot-text="白色" color="#f2826a" percentage="25" />
+      </div>
+    </div>
+  </div>
+  <!-- <ItemMusicTop :playlist="state.playList"></ItemMusicTop>
+  <ItemMusicList :itemlist="state.itemList" :subscribedCount="state.playList.subscribedCount"></ItemMusicList> -->
+</template>
+
+<script setup>
+import { useRoute } from "vue-router";
+import { onBeforeMount, onMounted, reactive } from "vue";
+import {
+  getMusicItemList,
+  getItemList,
+  getDetail,
+} from "@/request/api/item.js";
+import TopNav from "@/components/home/TopNav.vue";
+import { useStore } from "vuex";
+const store = useStore();
+const state = reactive({
+  list: [],
+});
+
+onBeforeMount(async () => {
+  const { data } = await getDetail(store.state.palymag.id);
+  state.list = data.songs;
+  console.log(state.list);
+});
+
+// export default {
+//   setup() {
+//     const state = reactive({
+//       playList: [], // 歌单的详情页的数据
+//       itemList: [], // 歌单的歌曲
+//     });
+//     onMounted(async () => {
+//       let id = useRoute().query.id;
+//       // 获取歌单详情
+//       let res = await getMusicItemList(id);
+//       state.playList = res.data.playlist;
+//       // 获取歌单的歌曲
+//       let result = await getItemList(id);
+//       state.itemList = result.data.songs;
+//       // 防止页面刷新，数据丢失，将数据保存到 sessionStorage 中
+//       sessionStorage.setItem("itemDetail", JSON.stringify(state));
+//     });
+//     return { state };
+//   },
+//   components: {
+//     ItemMusicTop,
+//     ItemMusicList,
+//   },
+// };
+</script>
+
+<style lang="less" scoped>
+.con {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0.2rem 0.3rem;
+  height: 100vh;
+  img {
+    flex: 1;
+    border-radius: 0.3rem;
+    width: 100%;
+    padding: 0.1rem;
+    margin: 5px 0;
+  }
+  .geci {
+    flex: 1;
+    background-color: aquamarine;
+  }
+  .gongneng {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .icons {
+      display: flex;
+      justify-content: space-between;
+      .icon {
+        margin: 0.05rem 0.1rem;
+      }
+    }
+    h2 {
+      font-size: 0.38rem;
+      padding: 0.1rem;
+    }
+    p {
+      font-size: 0.31rem;
+      display: inline-block;
+      padding: 0.1rem;
+    }
+    span {
+      font-size: 0.18rem;
+      padding: 0.1rem 0.2rem;
+      margin: auto;
+      border-radius: 999em;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+</style>
