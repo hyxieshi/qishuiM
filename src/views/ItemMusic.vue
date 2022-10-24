@@ -32,7 +32,7 @@
         </div>
       </div>
       <!-- 进度条 -->
-      <div>
+      <div class="pivot">
         <van-progress pivot-text="白色" color="#f2826a" percentage="25" />
       </div>
     </div>
@@ -42,8 +42,8 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-import { onBeforeMount, onMounted, reactive } from "vue";
+// import { useRoute } from "vue-router";
+import { onBeforeMount, onMounted, reactive, ref } from "vue";
 import {
   getMusicItemList,
   getItemList,
@@ -52,71 +52,59 @@ import {
 import TopNav from "@/components/home/TopNav.vue";
 import { useStore } from "vuex";
 const store = useStore();
+
 const state = reactive({
   list: [],
+  palyUrl: "",
 });
 
 onBeforeMount(async () => {
   const { data } = await getDetail(store.state.palymag.id);
+  store.state.palymag.playurl = `https://music.163.com/song/media/outer/url?id=${store.state.palymag.id}.mp3`;
   state.list = data.songs;
-  console.log(state.list);
+  // console.log(store.state.palymag.playurl, "----");
 });
-
-// export default {
-//   setup() {
-//     const state = reactive({
-//       playList: [], // 歌单的详情页的数据
-//       itemList: [], // 歌单的歌曲
-//     });
-//     onMounted(async () => {
-//       let id = useRoute().query.id;
-//       // 获取歌单详情
-//       let res = await getMusicItemList(id);
-//       state.playList = res.data.playlist;
-//       // 获取歌单的歌曲
-//       let result = await getItemList(id);
-//       state.itemList = result.data.songs;
-//       // 防止页面刷新，数据丢失，将数据保存到 sessionStorage 中
-//       sessionStorage.setItem("itemDetail", JSON.stringify(state));
-//     });
-//     return { state };
-//   },
-//   components: {
-//     ItemMusicTop,
-//     ItemMusicList,
-//   },
-// };
+// 播放暂停
 </script>
 
 <style lang="less" scoped>
 .con {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   flex-direction: column;
   margin: 0.2rem 0.3rem;
-  height: 100vh;
+  height: 100%;
   img {
-    flex: 1;
+    // flex: 1;
     border-radius: 0.3rem;
-    width: 100%;
+    width: 7rem;
     padding: 0.1rem;
     margin: 5px 0;
   }
   .geci {
-    flex: 1;
+    // flex: 1;
+    height: 2rem;
+    padding: 0.5rem 0;
     background-color: aquamarine;
   }
   .gongneng {
-    flex: 1;
+    // flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    .mag {
+      margin: 0.5rem 0;
+    }
     .icons {
       display: flex;
       justify-content: space-between;
+      padding: 0.3rem 0;
       .icon {
         margin: 0.05rem 0.1rem;
       }
+    }
+    .pivot {
+      margin: 0.3rem 0;
     }
     h2 {
       font-size: 0.38rem;

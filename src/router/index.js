@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/Home.vue";
 import Play from "../views/ItemMusic.vue";
-import store from "@/store/index.js";
 
 const routes = [
   {

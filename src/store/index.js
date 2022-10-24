@@ -34,9 +34,11 @@ export default createStore({
     user: {}, // 用户信息
     search: [],
     palymag: {
-      id: "1986655781",
-      palyurl: "",
-      picUrl: "",
+      id: "1986655781", //歌曲id
+      playurl: "", //歌曲url
+      picUrl: "", //图片url
+      play: 0, //是否播放
+      listId: 3778678, //歌单id
     },
   },
 
@@ -54,6 +56,13 @@ export default createStore({
       if (!state.search.includes(value)) {
         state.search.push(value);
       }
+    },
+    // 播放
+    playMusic(state, value) {
+      state.palymag.play = value;
+    },
+    getListId(state, value) {
+      state.palymag.listId = value;
     },
     updatePlayList(state, value) {
       state.playList = value;
