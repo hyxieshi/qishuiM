@@ -1,3 +1,13 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2022-10-22 23:41:23
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2022-10-30 18:17:07
+ * @FilePath: \src\components\home\IconList.vue
+ * @Description: 
+ * Copyright 2022 OBKoro1, All Rights Reserved. 
+ * 2022-10-22 23:41:23
+-->
 <template>
   <div class="con">
     <div class="nav">
@@ -28,6 +38,7 @@ const state = reactive({
 
 onBeforeMount(async () => {
   const { data } = await getMusicList();
+  console.log(data);
   state.list = data.result;
 });
 </script>
