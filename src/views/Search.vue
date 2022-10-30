@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-22 23:41:23
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-10-30 17:54:47
+ * @LastEditTime: 2022-10-30 18:37:28
  * @FilePath: \src\views\Search.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -23,11 +23,14 @@
         <h3>搜索记录</h3>
         <van-icon name="delete-o" size="0.55rem" />
       </div>
-      <div>
+      <div class="tag">
         <span
           v-for="(i, index) in state.search"
           :key="index"
-          @click="onSearch(i)"
+          @click="
+            state.value = i;
+            onSearch();
+          "
           >{{ i }}</span
         >
       </div>
@@ -64,9 +67,9 @@ const state = reactive({
 onBeforeMount(() => {
   state.search = store.state.search;
 });
-async function onSearch(value) {
+async function onSearch() {
   // store.state.palyList.push(state.value);
-  const { data } = await getSearchMusic(value || state.value);
+  const { data } = await getSearchMusic(state.value);
   store.commit("searchPush", state.value);
   console.log(data);
   state.palyList = data.result.songs;
@@ -106,6 +109,9 @@ function getPlay(id) {
     .navs {
       display: flex;
       justify-content: space-between;
+    }
+    .tag {
+      margin: 1px 5px;
     }
   }
 }

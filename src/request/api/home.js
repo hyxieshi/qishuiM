@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-22 23:41:23
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-10-30 17:49:38
+ * @LastEditTime: 2022-10-30 18:39:57
  * @FilePath: \src\request\api\home.js
  * @Description:
  * Copyright 2022 OBKoro1, All Rights Reserved.
@@ -42,7 +42,7 @@ export function getMusicList() {
 export function getSearchMusic(data) {
   return req({
     method: "GET",
-    url: `/search?keywords=${data}`,
+    url: `/search?keywords="${data}"`,
   });
 }
 // 发送短信验证码
