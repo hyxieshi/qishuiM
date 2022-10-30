@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-22 23:41:23
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-10-30 18:37:28
+ * @LastEditTime: 2022-10-30 19:07:32
  * @FilePath: \src\views\Search.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -70,12 +70,15 @@ onBeforeMount(() => {
 async function onSearch() {
   // store.state.palyList.push(state.value);
   const { data } = await getSearchMusic(state.value);
-  store.commit("searchPush", state.value);
   console.log(data);
+  store.commit("searchPush", state.value);
+
   state.palyList = data.result.songs;
+  console.log(state.palyList);
 }
 function getPlay(id) {
   store.state.palymag.id = id;
+  console.log(store.state.palymag.id);
   router.push(`/play`);
 }
 </script>

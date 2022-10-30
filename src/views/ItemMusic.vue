@@ -43,7 +43,7 @@
 
 <script setup>
 // import { useRoute } from "vue-router";
-import { onBeforeMount, onMounted, reactive, ref } from "vue";
+import { onBeforeMount, onMounted, reactive, ref, watch } from "vue";
 import {
   getMusicItemList,
   getItemList,
@@ -65,6 +65,13 @@ onBeforeMount(async () => {
   // console.log(store.state.palymag.playurl, "----");
 });
 // 播放暂停
+// 进入 旁边音乐id是否改变 改变暂停
+watch(
+  () => store.state.palymag.id,
+  () => {
+    store.state.palymag.play = 0;
+  }
+);
 </script>
 
 <style lang="less" scoped>
