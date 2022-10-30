@@ -1,3 +1,13 @@
+/*
+ * @Author: SunBOY
+ * @Date: 2022-10-22 23:41:23
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2022-10-30 17:49:38
+ * @FilePath: \src\request\api\home.js
+ * @Description:
+ * Copyright 2022 OBKoro1, All Rights Reserved.
+ * 2022-10-22 23:41:23
+ */
 import req from "..";
 
 // 获取首页轮播图的数据

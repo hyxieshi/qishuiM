@@ -1,8 +1,19 @@
+/*
+ * @Author: SunBOY
+ * @Date: 2022-10-22 23:41:23
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2022-10-30 17:57:03
+ * @FilePath: \src\request\index.js
+ * @Description:
+ * Copyright 2022 OBKoro1, All Rights Reserved.
+ * 2022-10-22 23:41:23
+ */
 import axios from "axios";
 import { useStore } from "vuex";
-const store = useStore();
+// "http://zlwcoder.asia"
+const url = "https://cloued-api.vercel.app/";
 let req = axios.create({
-  baseURL: "http://zlwcoder.asia",
+  baseURL: url,
   timeout: 5000,
   withCredentials: true,
   // headers: {
@@ -12,6 +23,8 @@ let req = axios.create({
 req.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
+    // config.url = config.url + "&realIP=116.25.146.177";
+    console.log(config);
     return config;
   },
   function (error) {

@@ -1,3 +1,13 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2022-10-22 23:41:23
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2022-10-30 17:20:12
+ * @FilePath: \src\components\home\MusicList.vue
+ * @Description: 
+ * Copyright 2022 OBKoro1, All Rights Reserved. 
+ * 2022-10-22 23:41:23
+-->
 <template>
   <div class="con">
     <div class="nav">
@@ -16,7 +26,6 @@
 
 <script setup>
 // import { getMusicList } from "@/request/api/home";
-import musicpaly from "./Musicpaly.vue";
 import { reactive, onMounted, ref } from "vue";
 import Musicpaly from "./Musicpaly.vue";
 import { useStore } from "vuex";

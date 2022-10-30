@@ -1,10 +1,20 @@
+<!--
+ * @Author: SunBOY
+ * @Date: 2022-10-22 23:41:23
+ * @LastEditors: SunBOY
+ * @LastEditTime: 2022-10-30 17:54:47
+ * @FilePath: \src\views\Search.vue
+ * @Description: 
+ * Copyright 2022 OBKoro1, All Rights Reserved. 
+ * 2022-10-22 23:41:23
+-->
 <template>
   <div class="con">
     <div class="nav">
       <van-icon name="arrow-left" class="left" size="0.55rem" />
       <div class="r">
-        <van-icon name="search" @click="onSearch" size="0.55rem" />
         <input v-model="state.value" placeholder="请输入搜索歌名" />
+        <van-icon name="search" @click="onSearch" size="0.55rem" />
       </div>
     </div>
     <br />
@@ -14,7 +24,26 @@
         <van-icon name="delete-o" size="0.55rem" />
       </div>
       <div>
-        <span v-for="(i, index) in state.search" :key="index">{{ i }}</span>
+        <span
+          v-for="(i, index) in state.search"
+          :key="index"
+          @click="onSearch(i)"
+          >{{ i }}</span
+        >
+      </div>
+    </div>
+    <div>
+      <div
+        class="list"
+        v-for="(i, index) in state.palyList"
+        :key="i.id"
+        @click="getPlay(i.id)"
+      >
+        <span>{{ index + 1 }}</span>
+        <div class="name">
+          <p class="h3">{{ i.name }}</p>
+          <p>{{ i.ar[0].name }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -23,7 +52,9 @@
 <script setup>
 import { getSearchMusic } from "@/request/api/home.js";
 import { onBeforeMount, onMounted, reactive } from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+const router = useRouter();
 const store = useStore();
 const state = reactive({
   value: "",
@@ -33,11 +64,16 @@ const state = reactive({
 onBeforeMount(() => {
   state.search = store.state.search;
 });
-async function onSearch() {
+async function onSearch(value) {
   // store.state.palyList.push(state.value);
-  const { data } = await getSearchMusic(state.value);
+  const { data } = await getSearchMusic(value || state.value);
   store.commit("searchPush", state.value);
+  console.log(data);
   state.palyList = data.result.songs;
+}
+function getPlay(id) {
+  store.state.palymag.id = id;
+  router.push(`/play`);
 }
 </script>
 
