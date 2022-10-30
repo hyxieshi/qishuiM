@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-22 23:41:23
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-10-30 17:57:03
+ * @LastEditTime: 2022-10-30 18:10:47
  * @FilePath: \src\request\index.js
  * @Description:
  * Copyright 2022 OBKoro1, All Rights Reserved.
@@ -11,7 +11,7 @@
 import axios from "axios";
 import { useStore } from "vuex";
 // "http://zlwcoder.asia"
-const url = "https://cloued-api.vercel.app/";
+const url = "cloued-api.tk";
 let req = axios.create({
   baseURL: url,
   timeout: 5000,
