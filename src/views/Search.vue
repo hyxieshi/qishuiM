@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-11-17 01:42:52
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-17 01:56:08
+ * @LastEditTime: 2022-11-17 02:15:50
  * @FilePath: \src\views\Search.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -31,7 +31,7 @@
     <div class="body">
       <div class="navs">
         <h3>搜索记录</h3>
-        <van-icon name="delete-o" size="0.55rem" />
+        <van-icon name="delete-o" size="0.4rem" />
       </div>
       <div class="tag">
         <span
@@ -79,6 +79,10 @@ onBeforeMount(() => {
 });
 async function onSearch() {
   // store.state.palyList.push(state.value);
+  if (state.value === "") {
+    console.log("输入为空");
+    return false;
+  }
   const { data } = await getSearchMusic(state.value);
   console.log(data);
   store.commit("searchPush", state.value);
@@ -110,10 +114,15 @@ function getPlay(id) {
     .r {
       flex: 1;
       margin-left: 10px;
+      display: flex;
+      justify-content: space-between;
       input {
         border-radius: 999em;
         background-color: rgba(0, 0, 0, 0);
         border: 1px solid;
+        flex: 1;
+        padding: 0 10px;
+        margin: 0 5px;
       }
     }
   }
@@ -129,6 +138,7 @@ function getPlay(id) {
   }
   .base {
     margin: 0 0 1rem 0;
+    flex: 1;
     .list {
       .name {
         margin: 10px;
