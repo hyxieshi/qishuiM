@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-22 23:41:23
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-17 02:54:00
+ * @LastEditTime: 2022-11-17 03:00:49
  * @FilePath: \src\views\Search.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -72,6 +72,7 @@ onBeforeMount(() => {
   } else if (localStorage.getItem("search")) {
     let res = JSON.parse(localStorage.getItem("search"));
     console.log(res);
+    store.commit("searchPush", res.search);
     state.search = res.search;
   } else {
     console.log("vuex localstorage  都没有记录");
@@ -94,7 +95,6 @@ async function onSearch() {
   const { data } = await getSearchMusic(state.value);
   console.log(data);
   store.commit("searchPush", state.value);
-
   state.palyList = data.result.songs;
   console.log(state.palyList);
 }

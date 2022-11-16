@@ -53,7 +53,9 @@ export default createStore({
     // 历史记录
     searchPush(state, value) {
       // 只加入没有的
-      if (!state.search.includes(value)) {
+      if (typeof value === "object") {
+        state.search = value;
+      } else if (!state.search.includes(value)) {
         state.search.push(value);
       }
     },
