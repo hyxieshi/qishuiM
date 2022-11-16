@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-22 23:41:23
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-17 02:30:05
+ * @LastEditTime: 2022-11-17 02:50:12
  * @FilePath: \src\views\Search.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -54,7 +54,7 @@
 
 <script setup>
 import { getSearchMusic } from "@/request/api/home.js";
-import { onBeforeMount, onMounted, reactive } from "vue";
+import { onBeforeMount, onMounted, reactive, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 const router = useRouter();
@@ -65,7 +65,22 @@ const state = reactive({
   search: [],
 });
 onBeforeMount(() => {
-  state.search = store.state.search;
+  if (store.state.search.length !== 0) {
+    console.log("vuex");
+    state.search = store.state.search;
+    return;
+  }
+  let res = JSON.parse(localStorage.getItem("search"));
+  console.log(res);
+  state.search = res.search;
+});
+onBeforeUnmount(() => {
+  localStorage.setItem(
+    "search",
+    JSON.stringify({
+      search: state.search,
+    })
+  );
 });
 async function onSearch() {
   // store.state.palyList.push(state.value);
