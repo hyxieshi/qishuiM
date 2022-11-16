@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-22 23:41:23
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-17 02:50:12
+ * @LastEditTime: 2022-11-17 02:54:00
  * @FilePath: \src\views\Search.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -69,10 +69,13 @@ onBeforeMount(() => {
     console.log("vuex");
     state.search = store.state.search;
     return;
+  } else if (localStorage.getItem("search")) {
+    let res = JSON.parse(localStorage.getItem("search"));
+    console.log(res);
+    state.search = res.search;
+  } else {
+    console.log("vuex localstorage  都没有记录");
   }
-  let res = JSON.parse(localStorage.getItem("search"));
-  console.log(res);
-  state.search = res.search;
 });
 onBeforeUnmount(() => {
   localStorage.setItem(
