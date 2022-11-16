@@ -1,18 +1,8 @@
 <!--
  * @Author: SunBOY
- * @Date: 2022-11-17 01:42:52
- * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-17 02:15:50
- * @FilePath: \src\views\Search.vue
- * @Description: 
- * Copyright 2022 OBKoro1, All Rights Reserved. 
- * 2022-11-17 01:42:52
--->
-<!--
- * @Author: SunBOY
  * @Date: 2022-10-22 23:41:23
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-17 01:51:03
+ * @LastEditTime: 2022-11-17 02:30:05
  * @FilePath: \src\views\Search.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -133,7 +123,14 @@ function getPlay(id) {
       justify-content: space-between;
     }
     .tag {
-      margin: 1px 5px;
+      margin: 5px;
+      span {
+        margin: 10px 2px;
+        padding: 5px;
+        border-radius: 999rem;
+        background-color: rgba(131, 128, 128, 0.151);
+        color: rgba(255, 255, 255, 0.603);
+      }
     }
   }
   .base {
