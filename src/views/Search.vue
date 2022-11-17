@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-10-22 23:41:23
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-17 03:00:49
+ * @LastEditTime: 2022-11-17 14:53:19
  * @FilePath: \src\views\Search.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -92,11 +92,16 @@ async function onSearch() {
     console.log("输入为空");
     return false;
   }
-  const { data } = await getSearchMusic(state.value);
-  console.log(data);
-  store.commit("searchPush", state.value);
-  state.palyList = data.result.songs;
-  console.log(state.palyList);
+  try {
+    const { data } = await getSearchMusic(state.value);
+    // throw new Error("1");
+    console.log(data);
+    store.commit("searchPush", state.value);
+    state.palyList = data.result.songs;
+    console.log(state.palyList);
+  } catch (error) {
+    console.log(error.response.data.message);
+  }
 }
 function getPlay(id) {
   store.state.palymag.id = id;
@@ -125,9 +130,11 @@ function getPlay(id) {
       display: flex;
       justify-content: space-between;
       input {
+        outline-style: none;
         border-radius: 999em;
         background-color: rgba(0, 0, 0, 0);
-        border: 1px solid;
+        border-style: solid;
+        border-width: 1px;
         flex: 1;
         padding: 0 10px;
         margin: 0 5px;
